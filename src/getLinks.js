@@ -1,7 +1,7 @@
 const { chromium } = require('playwright');
 const fs = require('fs')
 
-(async () => {
+const getLinks = async () => {
     const browser = await chromium.launch({headless: true});
     const context = await browser.newContext();
     const page = await context.newPage();
@@ -13,12 +13,12 @@ const fs = require('fs')
         beerLinks = await page.$$eval('a.css-i8ij9s.e1yt52hj1', (divs) => {
             return divs.map(div=>div.href)
         })
-        fs.writeFile('links.txt', beerLinks.join(', \n'), err => console.log(`File write Errors: ${err}`))
+        fs.writeFile('/assets/links.txt', beerLinks.join(', \n'), err => console.log(`File write Errors: ${err}`))
         await page.waitForTimeout(10000);
         await browser.close();
     }
+    
     let clickNum = 0;
-
      (showMore = async () => {
         try {
             await page.waitForSelector('button.css-1ykaym0.epc1dj70')
@@ -30,4 +30,8 @@ const fs = require('fs')
                 continueRunning()
           }
     })()
-})()
+}
+
+module.exports = getLinks;
+
+
