@@ -2,7 +2,7 @@ const { chromium } = require('playwright');
 const fs = require('fs')
 
 const getLinks = async () => {
-    const browser = await chromium.launch({headless: true});
+    const browser = await chromium.launch({headless: false, slowMo: 70});
     const context = await browser.newContext();
     const page = await context.newPage();
     await page.goto('https://www.systembolaget.se/sok/?categoryLevel1=%C3%96l');
