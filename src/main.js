@@ -1,9 +1,11 @@
 const getLinks = require('./getLinks');
 const getData = require('./getData');
 
-// getLinks()
+(async ()=>{
+    await getLinks()//.then(message=>console.log(message))
+    getData()
+})()
 
-getData()
 
 
 
